@@ -10,7 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.ForeignKey;
 
 /**
  *
@@ -44,6 +47,19 @@ public class Aluno implements Serializable {
     
     @Column(name = "telefone", nullable = true, length = 45)
     private String telefone;
+    
+    @ManyToOne(optional = false)
+    @ForeignKey(name = "FK_idTurma")
+    @JoinColumn(name = "idTurma", referencedColumnName = "idTurma")
+    private Turma turma;
+    
+    @ManyToOne(optional = false)
+    @ForeignKey(name = "FK_idUsuario")
+    @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
+    private Usuario usuario;
+
+    public Aluno() {
+    }
 
     public Integer getIdPessoa() {
         return idPessoa;
@@ -99,6 +115,22 @@ public class Aluno implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

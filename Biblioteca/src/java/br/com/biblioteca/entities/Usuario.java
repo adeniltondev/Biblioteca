@@ -5,12 +5,16 @@
 package br.com.biblioteca.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.ForeignKey;
 
 /**
  *
@@ -18,7 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Usuario")
-public class Usuario implements Serializable {
+public class Usuario<T> implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
@@ -26,6 +30,17 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "idUsuario", nullable = false)
     private Integer idUsuario;
+    
+    @OneToMany(mappedBy = "Usuario", fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_idUsuario")
+    private List<T> usuarios;
+    
+    @OneToMany(mappedBy = "Usuario", fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_idUsuario")
+    private List<Emprestimo> emprestimos;
+
+    public Usuario() {
+    }
 
     public Integer getIdUsuario() {
         return idUsuario;
@@ -33,6 +48,22 @@ public class Usuario implements Serializable {
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public List<T> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<T> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+
+    public void setEmprestimos(List<Emprestimo> emprestimos) {
+        this.emprestimos = emprestimos;
     }
 
     @Override

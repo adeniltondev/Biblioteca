@@ -5,12 +5,16 @@
 package br.com.biblioteca.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.ForeignKey;
 
 /**
  *
@@ -29,6 +33,13 @@ public class Turma implements Serializable {
     
     @Column(name = "nome", unique = true, nullable = false, length = 45)
     private String nome;
+    
+    @OneToMany(mappedBy = "Turma", fetch = FetchType.LAZY)
+    @ForeignKey(name = "FK_idTurma")
+    private List<Aluno> alunos;
+
+    public Turma() {
+    }
 
     public Integer getIdTurma() {
         return idTurma;
@@ -44,6 +55,14 @@ public class Turma implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 
     @Override
