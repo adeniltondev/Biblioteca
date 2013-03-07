@@ -59,6 +59,8 @@ public class Aluno implements Serializable {
     private Usuario usuario;
 
     public Aluno() {
+        turma = new Turma();
+        usuario = new Usuario();
     }
 
     public Integer getIdPessoa() {

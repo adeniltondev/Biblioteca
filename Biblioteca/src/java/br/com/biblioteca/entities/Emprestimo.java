@@ -53,6 +53,9 @@ public class Emprestimo implements Serializable {
     private Livro livro;
     
     public Emprestimo() {
+        usuario = new Usuario();
+        responsavel = new Responsavel();
+        livro = new Livro();
     }
 
     public Integer getIdEmprestimo() {

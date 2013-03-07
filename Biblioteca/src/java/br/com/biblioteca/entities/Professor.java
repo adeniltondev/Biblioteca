@@ -54,6 +54,7 @@ public class Professor implements Serializable {
     private Usuario usuario;
 
     public Professor() {
+        usuario = new Usuario();
     }
 
     public Integer getIdProfessor() {
